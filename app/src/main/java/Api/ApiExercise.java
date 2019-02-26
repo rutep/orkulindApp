@@ -1,9 +1,21 @@
 package Api;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import Entity.Exercise;
 import Entity.User;
 
-public class ApiExercise {
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class ApiExercise{
+
+    public ApiExercise() {
+
+    }
 
     /*
      * Usage: api.createExercise(exercise)
@@ -42,9 +54,27 @@ public class ApiExercise {
      * Before: User user, user = logged in user
      * After: return all user exercises
      */
-    public Exercise[] findAllUserExercises(User user) {
-        // Todo
-        return null;
+    public List<Exercise> findAllUserExercises(User user) {
+
+        HttpGetRequest request = new HttpGetRequest();
+        String result = null;
+        try {
+            result = request.execute("api/exercises").get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        List<Exercise> exercises = null;
+        try {
+            exercises = mapper.readValue(result, new TypeReference<List<Exercise>>(){});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return exercises;
     }
 
 }
