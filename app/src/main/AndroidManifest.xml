@@ -26,7 +26,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ExerciseActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".SelectSessionActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

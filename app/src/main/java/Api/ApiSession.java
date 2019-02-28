@@ -1,5 +1,12 @@
 package Api;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import Entity.Exercise;
 import Entity.User;
 import Entity.Session;
@@ -42,9 +49,25 @@ public class ApiSession {
      * Before: User user, user = logged in user
      * After: return all user sessions
      */
-    public Session[] findAllUserSession(User user) {
-        // Todo
-        return null;
-    }
+    public List<Session> findAllUserSession(User user) {
 
+        HttpGetRequest request = new HttpGetRequest();
+        String result = null;
+        try {
+            result = request.execute("api/sessions").get();
+        } catch (ExecutionException e){
+            e.printStackTrace();
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        List<Session> sessions = null;
+        try {
+            sessions = mapper.readValue(result, new TypeReference<List<Session>>(){});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sessions;
+    }
 }
