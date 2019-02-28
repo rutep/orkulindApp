@@ -1,5 +1,6 @@
 package com.example.orkulindapp;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -31,30 +32,29 @@ public class SelectExerciseActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Add", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent i = new Intent(SelectExerciseActivity.this, ExerciseActivity.class);
+                i.putExtra("Exercise", new Exercise());
+                startActivity(i);
             }
         });
 
         //List of Exercises
-        String result;
 
         api = new ApiExercise();
 
         exercises = api.findAllUserExercises(new User());
 
         ArrayAdapter adapter = new ArrayAdapter<Exercise>(this, R.layout.activity_listview, exercises);
-        ListView listView = (ListView) findViewById(R.id.exercise_list);
+        ListView listView = findViewById(R.id.exercise_list);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                String prufa = exercises.get(position).toString();
-
-                Snackbar.make(view, prufa, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent i = new Intent(SelectExerciseActivity.this, ExerciseActivity.class);
+                i.putExtra("Exercise", exercises.get(position));
+                startActivity(i);
             }
         });
     }

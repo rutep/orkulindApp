@@ -33,9 +33,9 @@ public class ApiExercise{
      * Before: {int x, x > 0} And has to be an id of a exercise that exists.
      * After: if success exercise with according id is deleted else error.
      */
-    public String deleteExercise(int id) {
+    public void deleteExercise(Exercise exercise) {
         // Todo
-        return "";
+
     }
 
     /*

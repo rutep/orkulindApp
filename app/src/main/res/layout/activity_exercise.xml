@@ -26,12 +26,12 @@
             android:layout_height="wrap_content" />
 
         <Spinner
-            android:id="@+id/repType"
+            android:id="@+id/exerciseRepType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/reps"
+            android:id="@+id/exerciseReps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -39,7 +39,7 @@
             android:hint="Reps"/>
 
         <EditText
-            android:id="@+id/videoLink"
+            android:id="@+id/exerciseVideoLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
