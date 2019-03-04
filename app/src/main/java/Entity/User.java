@@ -3,7 +3,7 @@ package Entity;
 public class User {
 
     private int id;
-    private String username;
+    private String name;
     private String password;
     private String errorMsg;
 
@@ -11,16 +11,40 @@ public class User {
 
     }
 
-    public User(int id, String username, String password) {
+    public User(int id, String name, String password) {
         this.id = id;
-        this.username = username;
+        this.name = name;
         this.password = password;
     }
 
-    public User(int id, String username, String password, String errorMsg) {
+    public User(int id, String name, String password, String errorMsg) {
         this.id = id;
-        this.username = username;
+        this.name = name;
         this.password = password;
         this.errorMsg = errorMsg;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
