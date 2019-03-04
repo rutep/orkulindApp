@@ -54,6 +54,8 @@ public class ApiSession {
      */
     public List<Session> findAllUserSession(User user) {
 
+        /*
+
         //Test user
         user.setId(2);
         user.setPassword("eggegg");
@@ -92,6 +94,9 @@ public class ApiSession {
 
         return sessions;
 
+        */
+
+        return null;
 
     }
 }
