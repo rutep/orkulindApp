@@ -2,6 +2,7 @@ package Api;
 
 import android.os.AsyncTask;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -22,18 +23,20 @@ public class HttpPostRequest extends AsyncTask<String, Void, String> {
     private JSONObject postData;
 
 
-    public HttpPostRequest(Map<String, String> postData) {
+    public HttpPostRequest(String postData) {
         if (postData != null) {
-            this.postData = new JSONObject(postData);
+            try {
+                this.postData = new JSONObject(postData);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
     protected String doInBackground(String... params){
         String stringUrl = LOCALURL + params[0];
-
         String response = null;
-        String inputLine;
         try {
             //Create a URL object holding our url
             URL myUrl = new URL(stringUrl);

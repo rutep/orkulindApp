@@ -6,6 +6,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -75,11 +78,19 @@ public class ApiExercise{
             e.printStackTrace();
         }
 
-        //Post user to server
-        Map<String, String> postData = new HashMap<>();
-        postData.put("user", jsonUser);
-        HttpPostRequest request = new HttpPostRequest(postData);
+        /*
+        JSONParser parser = new JSONParser();
+        Map<String, String> map = new HashMap<String, String>();
+        try {
+            map = mapper.readValue(jsonUser, new TypeReference<Map<String, String>>(){});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
 
+        HttpPostRequest request = new HttpPostRequest(jsonUser);
+
+        //Post user to server
         try {
             response = request.execute("api/exercises").get();
         } catch (ExecutionException e) {
