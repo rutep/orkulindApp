@@ -61,9 +61,9 @@ public class ApiExercise{
     public List<Exercise> findAllUserExercises(User user) {
 
         //Test user
-        user.setId(1000);
-        user.setPassword("lykilord");
-        user.setName("notandi");
+        user.setId(2);
+        user.setPassword("eggegg");
+        user.setName("orri9");
 
         //Convert user to jsonString
         ObjectMapper mapper = new ObjectMapper();
