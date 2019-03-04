@@ -1,10 +1,13 @@
 package Api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import Entity.Exercise;
@@ -28,9 +31,9 @@ public class ApiSession {
      * Before: {int x, x > 0} And has to be an id of a session that exists.
      * After: if success session with according id is deleted else error.
      */
-    public String deleteSession(int id) {
+    public Session deleteSession(int id) {
         // Todo
-        return "";
+        return new Session();
     }
 
     /*
@@ -51,23 +54,44 @@ public class ApiSession {
      */
     public List<Session> findAllUserSession(User user) {
 
-        HttpGetRequest request = new HttpGetRequest();
-        String result = null;
+        //Test user
+        user.setId(2);
+        user.setPassword("eggegg");
+        user.setName("orri9");
+
+        //Convert user to jsonString
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonUser = null;
+        String response = null;
         try {
-            result = request.execute("api/sessions").get();
-        } catch (ExecutionException e){
-            e.printStackTrace();
-        } catch (InterruptedException e){
+            jsonUser = mapper.writeValueAsString(user);
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
-        ObjectMapper mapper = new ObjectMapper();
+        //Post user to server
+        Map<String, String> postData = new HashMap<>();
+        postData.put("user", jsonUser);
+        HttpPostRequest request = new HttpPostRequest(postData);
+
+        try {
+            response = request.execute("api/session").get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //Convert sessions response to a list of sessions
         List<Session> sessions = null;
         try {
-            sessions = mapper.readValue(result, new TypeReference<List<Session>>(){});
+            sessions = mapper.readValue(response, new TypeReference<List<Session>>(){});
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return sessions;
+
+
     }
 }
