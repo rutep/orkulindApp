@@ -48,7 +48,7 @@ public class ApiExercise{
      * After: if success exercise with according id returned else error message.
      */
     public Exercise findExercise(int id) {
-        // Todo
+
         return new Exercise();
     }
 
