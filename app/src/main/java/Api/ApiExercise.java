@@ -78,16 +78,6 @@ public class ApiExercise{
             e.printStackTrace();
         }
 
-        /*
-        JSONParser parser = new JSONParser();
-        Map<String, String> map = new HashMap<String, String>();
-        try {
-            map = mapper.readValue(jsonUser, new TypeReference<Map<String, String>>(){});
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
-
         HttpPostRequest request = new HttpPostRequest(jsonUser);
 
         //Post user to server
