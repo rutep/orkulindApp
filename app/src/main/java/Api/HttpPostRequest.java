@@ -20,16 +20,12 @@ public class HttpPostRequest extends AsyncTask<String, Void, String> {
     public static final int READ_TIMEOUT = 15000;
     public static final int CONNECTION_TIMEOUT = 15000;
     public static final String LOCALURL = "http://10.0.2.2:8080/";
-    private JSONObject postData;
+    private String postData;
 
 
     public HttpPostRequest(String postData) {
         if (postData != null) {
-            try {
-                this.postData = new JSONObject(postData);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            this.postData = postData;
         }
     }
 
@@ -53,7 +49,7 @@ public class HttpPostRequest extends AsyncTask<String, Void, String> {
             //Post Data
             if (this.postData != null) {
                 OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-                writer.write(postData.toString());
+                writer.write(this.postData);
                 writer.flush();
             }
 
