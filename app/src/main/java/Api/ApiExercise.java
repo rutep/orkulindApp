@@ -32,9 +32,6 @@ public class ApiExercise{
      */
     public void createExercise(Exercise exercise) {
 
-        //Test Exercise
-        exercise = new Exercise(1010, "nafn", "týpa", 10, "reptýpa", "videolinkur");
-
         //Convert exercise to jsonString
         ObjectMapper mapper = new ObjectMapper();
         String jsonExercise = null;

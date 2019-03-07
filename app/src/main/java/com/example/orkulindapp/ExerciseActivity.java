@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import Api.ApiExercise;
@@ -35,6 +37,14 @@ public class ExerciseActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name = ((EditText)findViewById(R.id.exerciseName)).getText().toString();
+                //String type = ((Spinner)findViewById(R.id.exerciseType)).getSelectedItem().toString();
+                //String repType = ((Spinner)findViewById(R.id.exerciseRepType)).getSelectedItem().toString();
+                String type = "";
+                String repType = "";
+                int reps = Integer.parseInt(((EditText)findViewById(R.id.exerciseReps)).getText().toString());
+                String videoLink = ((EditText)findViewById(R.id.exerciseVideoLink)).getText().toString();
+                exercise = new Exercise(0, name, type, reps, repType, videoLink);
                 api.createExercise(exercise);
                 setResult(RESULT_OK, null);
                 finish();
