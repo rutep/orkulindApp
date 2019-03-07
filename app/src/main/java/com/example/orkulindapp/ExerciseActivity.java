@@ -44,7 +44,13 @@ public class ExerciseActivity extends AppCompatActivity {
                 String repType = "";
                 int reps = Integer.parseInt(((EditText)findViewById(R.id.exerciseReps)).getText().toString());
                 String videoLink = ((EditText)findViewById(R.id.exerciseVideoLink)).getText().toString();
-                exercise = new Exercise(0, name, type, reps, repType, videoLink);
+
+                exercise.setName(name);
+                exercise.setType(type);
+                exercise.setReps(reps);
+                exercise.setType(repType);
+                exercise.setInfo(videoLink);
+
                 api.createExercise(exercise);
                 setResult(RESULT_OK, null);
                 finish();
