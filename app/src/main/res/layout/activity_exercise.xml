@@ -22,7 +22,9 @@
             android:ems="10"
             android:hint="Exercise Name"
             android:layout_marginTop="64dp"
-            android:layout_marginBottom="32dp"/>
+            android:layout_marginBottom="32dp"
+            android:maxLines="1"
+            android:singleLine="true"/>
 
         <Spinner
             android:id="@+id/exerciseType"
@@ -43,7 +45,9 @@
             android:ems="10"
             android:inputType="number"
             android:hint="Reps"
-            android:layout_marginBottom="32dp"/>
+            android:layout_marginBottom="32dp"
+            android:maxLines="1"
+            android:singleLine="true"/>
 
         <EditText
             android:id="@+id/exerciseVideoLink"
@@ -51,7 +55,9 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Youtube Link"
-            android:layout_marginBottom="32dp"/>
+            android:layout_marginBottom="32dp"
+            android:maxLines="1"
+            android:singleLine="true"/>
 
         <LinearLayout
             android:layout_width="match_parent"
