@@ -49,6 +49,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity  {
 
+    private User user;
 
 
     @Override
@@ -97,14 +98,16 @@ public class LoginActivity extends AppCompatActivity  {
                     e.printStackTrace();
                 }
 
-                User u = null;
                 try {
-                    u = mapper.readValue(response, User.class);
+                    user = mapper.readValue(response, User.class);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                System.out.println("test");
+
+
+                name.setText(user.getErrorMsg());
             }
         });
 

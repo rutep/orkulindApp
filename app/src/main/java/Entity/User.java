@@ -1,18 +1,16 @@
 package Entity;
 
-import android.widget.EditText;
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable {
 
     private int id;
     private String name;
     private String password;
     private String errorMsg;
 
-    public User(int id, String name, String password) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
+    public User () {
+
     }
 
     public User(String name, String password) {
@@ -50,4 +48,8 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getErrorMsg() { return this.errorMsg; }
+
+    public void setErrorMsg(String errorMsg) { this.errorMsg = errorMsg; }
 }
