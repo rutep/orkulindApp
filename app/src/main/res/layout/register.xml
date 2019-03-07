@@ -22,7 +22,7 @@
                 android:ems="10"
                 android:hint="Name"
                 android:inputType="textPersonName" />
-
+                android:inputType="numberSigned|textPersonName" />
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"

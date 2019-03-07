@@ -62,14 +62,12 @@ public class RegisterActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
+                User u = null;
                 try {
-                    user = mapper.readValue(response, new TypeReference<User>(){});
+                    u = mapper.readValue(response, User.class);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                name.setText(user.getName());
 
             }
         });

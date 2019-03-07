@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity  {
         });
 
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = (Button) findViewById(R.id.signin);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,14 +97,14 @@ public class LoginActivity extends AppCompatActivity  {
                     e.printStackTrace();
                 }
 
-
+                User u = null;
                 try {
-                    user = mapper.readValue(response, User.class);
+                    u = mapper.readValue(response, User.class);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                name.setText(user.getName());
+                System.out.println("test");
             }
         });
 
