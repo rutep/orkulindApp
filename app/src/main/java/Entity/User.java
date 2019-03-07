@@ -1,5 +1,7 @@
 package Entity;
 
+import android.widget.EditText;
+
 public class User {
 
     private int id;
@@ -7,12 +9,13 @@ public class User {
     private String password;
     private String errorMsg;
 
-    public User() {
-
-    }
-
     public User(int id, String name, String password) {
         this.id = id;
+        this.name = name;
+        this.password = password;
+    }
+
+    public User(String name, String password) {
         this.name = name;
         this.password = password;
     }
