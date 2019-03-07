@@ -5,10 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import Api.ApiExercise;
 import Entity.Exercise;
@@ -26,6 +30,29 @@ public class ExerciseActivity extends AppCompatActivity {
         exercise = (Exercise) getIntent().getSerializableExtra("Exercise");
         api = new ApiExercise();
 
+        // Type spinner
+        Spinner typeSpinner = (Spinner) findViewById(R.id.exerciseType);
+
+        List<String> types = new ArrayList<String>();
+        types.add("Type 1");
+        types.add("Type 2");
+        types.add("Type 3");
+
+        ArrayAdapter<String> dataAdapterType = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, types);
+        dataAdapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeSpinner.setAdapter(dataAdapterType);
+
+        // Reptype spinner
+        Spinner repTypespinner = (Spinner) findViewById(R.id.exerciseRepType);
+
+        List<String> repTypes = new ArrayList<String>();
+        repTypes.add("reps");
+        repTypes.add("minutes");
+
+        ArrayAdapter<String> dataAdapterRepType = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, repTypes);
+        dataAdapterRepType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        repTypespinner.setAdapter(dataAdapterRepType);
+
         //Exercise Inputs
         TextView exerciseName = findViewById(R.id.exerciseName);
         exerciseName.setText(exercise.getName());
@@ -38,17 +65,15 @@ public class ExerciseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = ((EditText)findViewById(R.id.exerciseName)).getText().toString();
-                //String type = ((Spinner)findViewById(R.id.exerciseType)).getSelectedItem().toString();
-                //String repType = ((Spinner)findViewById(R.id.exerciseRepType)).getSelectedItem().toString();
-                String type = "";
-                String repType = "";
+                String type = ((Spinner)findViewById(R.id.exerciseType)).getSelectedItem().toString();
+                String repType = ((Spinner)findViewById(R.id.exerciseRepType)).getSelectedItem().toString();
                 int reps = Integer.parseInt(((EditText)findViewById(R.id.exerciseReps)).getText().toString());
                 String videoLink = ((EditText)findViewById(R.id.exerciseVideoLink)).getText().toString();
 
                 exercise.setName(name);
                 exercise.setType(type);
                 exercise.setReps(reps);
-                exercise.setType(repType);
+                exercise.setRepType(repType);
                 exercise.setInfo(videoLink);
 
                 api.createExercise(exercise);
