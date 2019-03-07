@@ -30,9 +30,25 @@ public class ApiExercise{
      *                             int reps, String repType, String info, String videoLink)
      * After: if exercise passes validation then new exercise has bin created else error message.
      */
-    public Exercise createExercise(Exercise exercise) {
-        // Todo
-        return exercise;
+    public void createExercise(Exercise exercise) {
+
+        //Test Exercise
+        exercise = new Exercise(1010, "nafn", "týpa", 10, "reptýpa", "videolinkur");
+
+        //Convert exercise to jsonString
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonExercise = null;
+
+        try {
+            jsonExercise = mapper.writeValueAsString(exercise);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        Log.d("exercise", jsonExercise);
+        HttpPostRequest request = new HttpPostRequest(jsonExercise);
+
+        //Post to server
+        request.execute("api/createExercise");
     }
 
     /*
@@ -41,7 +57,22 @@ public class ApiExercise{
      * After: if success exercise with according id is deleted else error.
      */
     public void deleteExercise(Exercise exercise) {
-        // Todo
+
+        //Convert exercise to jsonString
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonExercise = null;
+
+
+        try {
+            jsonExercise = mapper.writeValueAsString(exercise);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        HttpPostRequest request = new HttpPostRequest(jsonExercise);
+
+        //Post to server
+        request.execute("api/removeExercise");
 
     }
 
@@ -64,9 +95,9 @@ public class ApiExercise{
     public List<Exercise> findAllUserExercises(User user) {
 
         //Test user
-        user.setId(2);
-        user.setPassword("eggegg");
-        user.setName("orri9");
+        user.setId(1000);
+        user.setPassword("lykilord");
+        user.setName("notandi");
 
         //Convert user to jsonString
         ObjectMapper mapper = new ObjectMapper();

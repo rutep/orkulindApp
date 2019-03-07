@@ -34,7 +34,7 @@ public class SelectExerciseActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(SelectExerciseActivity.this, ExerciseActivity.class);
                 i.putExtra("Exercise", new Exercise());
-                startActivity(i);
+                startActivityForResult(i,1);
             }
         });
 
@@ -54,8 +54,18 @@ public class SelectExerciseActivity extends AppCompatActivity {
                                     int position, long id) {
                 Intent i = new Intent(SelectExerciseActivity.this, ExerciseActivity.class);
                 i.putExtra("Exercise", exercises.get(position));
-                startActivity(i);
+                startActivityForResult(i,2);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+            Intent refresh = new Intent(this, SelectExerciseActivity.class);
+            startActivity(refresh);
+            this.finish();
+        }
     }
 }

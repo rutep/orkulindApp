@@ -36,6 +36,7 @@ public class ExerciseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 api.createExercise(exercise);
+                setResult(RESULT_OK, null);
                 finish();
             }
         });
@@ -45,6 +46,7 @@ public class ExerciseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 api.deleteExercise(exercise);
+                setResult(RESULT_OK, null);
                 finish();
             }
         });

@@ -10,7 +10,6 @@ public class Exercise implements Serializable {
     private int reps;
     private String repType;
     private String info;
-    private String videoLink;
     private int userID;
 
     public Exercise() {
@@ -18,7 +17,7 @@ public class Exercise implements Serializable {
     }
 
     public Exercise(int id, String name, String type,
-                    int reps, String repType, String info, String videoLink) {
+                    int reps, String repType, String info) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -26,7 +25,6 @@ public class Exercise implements Serializable {
         this.repType = repType;
         this.info = info;
         this.userID = userID;
-        this.videoLink = videoLink;
     }
 
     public String toString() {
@@ -79,14 +77,6 @@ public class Exercise implements Serializable {
 
     public void setInfo(String info) {
         this.info = info;
-    }
-
-    public String getVideoLink() {
-        return videoLink;
-    }
-
-    public void setVideoLink(String videoLink) {
-        this.videoLink = videoLink;
     }
 
     public int getUserID() {
