@@ -60,7 +60,7 @@ public class ExerciseActivity extends AppCompatActivity {
         exerciseReps.setText(Integer.toString(exercise.getReps()));
 
         //Save and Delete Buttons
-        Button saveButton = findViewById(R.id.saveButton);
+        Button saveButton = findViewById(R.id.saveButton_exercise);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +82,7 @@ public class ExerciseActivity extends AppCompatActivity {
             }
         });
 
-        Button deleteButton = findViewById(R.id.deleteButton);
+        Button deleteButton = findViewById(R.id.deleteButton_exercise);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

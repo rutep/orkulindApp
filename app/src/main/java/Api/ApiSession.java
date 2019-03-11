@@ -21,9 +21,9 @@ public class ApiSession {
      * Before: Session session = new Session(Exercise[] exercises)
      * After: The selected exercises have bin stored if not error message
      */
-    public Exercise createSession(Exercise[] exercises) {
+    public void saveSession(Session session) {
         // Todo
-        return null;
+
     }
 
     /*
@@ -31,9 +31,9 @@ public class ApiSession {
      * Before: {int x, x > 0} And has to be an id of a session that exists.
      * After: if success session with according id is deleted else error.
      */
-    public Session deleteSession(int id) {
+    public void deleteSession(int id) {
         // Todo
-        return new Session();
+
     }
 
     /*
@@ -52,14 +52,14 @@ public class ApiSession {
      * Before: User user, user = logged in user
      * After: return all user sessions
      */
-    public List<Session> findAllUserSession(User user) {
+    public List<Session> findAllUserSessions(User user) {
 
-        /*
+
 
         //Test user
-        user.setId(2);
-        user.setPassword("eggegg");
-        user.setName("orri9");
+        user.setId(1000);
+        user.setPassword("notandi");
+        user.setName("lykilord");
 
         //Convert user to jsonString
         ObjectMapper mapper = new ObjectMapper();
@@ -72,12 +72,10 @@ public class ApiSession {
         }
 
         //Post user to server
-        Map<String, String> postData = new HashMap<>();
-        postData.put("user", jsonUser);
-        HttpPostRequest request = new HttpPostRequest(postData);
+        HttpPostRequest request = new HttpPostRequest(jsonUser);
 
         try {
-            response = request.execute("api/session").get();
+            response = request.execute("api/sessions").get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -93,10 +91,6 @@ public class ApiSession {
         }
 
         return sessions;
-
-        */
-
-        return null;
 
     }
 }

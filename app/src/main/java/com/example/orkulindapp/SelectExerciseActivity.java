@@ -28,7 +28,7 @@ public class SelectExerciseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_exercise);
 
         //Add Exercise Button
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab_exercise);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,7 +42,7 @@ public class SelectExerciseActivity extends AppCompatActivity {
 
         api = new ApiExercise();
 
-        // exercises = api.findAllUserExercises(new User());
+        exercises = api.findAllUserExercises(new User());
 
         ArrayAdapter adapter = new ArrayAdapter<Exercise>(this, R.layout.activity_listview, exercises);
         ListView listView = findViewById(R.id.exercise_list);
