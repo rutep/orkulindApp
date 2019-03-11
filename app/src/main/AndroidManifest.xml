@@ -15,8 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".SelectTrainActivity"></activity>
+        <activity android:name=".SelectTrainActivity" />
         <activity android:name=".SelectExerciseActivity" />
         <activity android:name=".StatisticActivity" />
         <activity android:name=".PersonalActivity" />

@@ -5,18 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
-
-import Api.HttpPostRequest;
+import android.widget.TextView;
+import Api.ApiUser;
 import Entity.User;
 
 public class RegisterActivity extends AppCompatActivity {
+
+    ApiUser api = new ApiUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,36 +32,18 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 EditText name = (EditText)findViewById(R.id.name);
                 EditText password = (EditText)findViewById(R.id.password);
-
+                TextView error = (TextView) findViewById(R.id.error);
 
                 User user = new User(name.getText().toString(),password.getText().toString());
 
-                //Convert user to jsonString
-                ObjectMapper mapper = new ObjectMapper();
-                String jsonUser = null;
-                String response = null;
-                try {
-                    jsonUser = mapper.writeValueAsString(user);
-                } catch (JsonProcessingException e) {
-                    e.printStackTrace();
-                }
+                user = api.register(user);
 
-                HttpPostRequest request = new HttpPostRequest(jsonUser);
+                if(user.getError().length() > 0) {
+                    name.setError(user.getError());
+                    password.setError(user.getError());
 
-                //Post user to server
-                try {
-                    response = request.execute("register/api").get();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                User u = null;
-                try {
-                    u = mapper.readValue(response, User.class);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } else {
+                    error.setText("New user has bin created");
                 }
 
             }
