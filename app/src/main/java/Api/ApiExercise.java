@@ -41,7 +41,7 @@ public class ApiExercise{
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        Log.d("exercise", jsonExercise);
+
         HttpPostRequest request = new HttpPostRequest(jsonExercise);
 
         //Post to server

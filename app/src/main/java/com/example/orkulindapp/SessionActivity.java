@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -35,7 +36,26 @@ public class SessionActivity extends AppCompatActivity {
         session = (Session) getIntent().getSerializableExtra("Session");
         api = new ApiSession();
 
+        //Session name
+        TextView sessionName = findViewById(R.id.sessionName);
+        sessionName.setText(session.getName());
 
+        // Type spinner
+
+        Spinner typeSpinner = (Spinner) findViewById(R.id.sessionType);
+
+        List<String> types = new ArrayList<String>();
+        types.add("Type 1");
+        types.add("Type 2");
+
+        ArrayAdapter<String> dataAdapterType = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, types);
+        dataAdapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeSpinner.setAdapter(dataAdapterType);
+
+        int spinnerPosition = dataAdapterType.getPosition(session.getType());
+        typeSpinner.setSelection(spinnerPosition);
+
+        //Exercise List
 
         exercise_api = new ApiExercise();
         final List<Exercise> exercises = exercise_api.findAllUserExercises(new User());
@@ -46,16 +66,18 @@ public class SessionActivity extends AppCompatActivity {
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(adapter);
 
-        int pos = 0;
-        for (Exercise exercise: exercises) {
-            for(Exercise sess_ex: session.getExercises()){
-                if(sess_ex.getId() == exercise.getId()) {
-                    listView.setItemChecked(pos, true);
-                }
-            }
-            pos+=1;
-        }
+        if(session.getExercises() != null) {
 
+            int pos = 0;
+            for (Exercise exercise: exercises) {
+                for(Exercise sess_ex: session.getExercises()){
+                    if(sess_ex.getId() == exercise.getId()) {
+                        listView.setItemChecked(pos, true);
+                    }
+                }
+                pos+=1;
+            }
+        }
 
         //Save and Delete Buttons
         Button saveButton = findViewById(R.id.saveButton_session);
@@ -67,8 +89,12 @@ public class SessionActivity extends AppCompatActivity {
                 for (int i = 0; i < selectedItems.size(); i++) {
                     selectedExercises.add(exercises.get(selectedItems.keyAt(i)));
                 }
+                String name = ((EditText)findViewById(R.id.sessionName)).getText().toString();
+                String type = ((Spinner)findViewById(R.id.sessionType)).getSelectedItem().toString();
+                session.setName(name);
+                session.setType(type);
                 session.setExercises(selectedExercises);
-                api.saveSession(session);
+                api.createSession(session);
                 setResult(RESULT_OK, null);
                 finish();
             }
@@ -78,7 +104,7 @@ public class SessionActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //api.deleteSession(session);
+                api.deleteSession(session);
                 setResult(RESULT_OK, null);
                 finish();
             }

@@ -42,8 +42,11 @@ public class ExerciseActivity extends AppCompatActivity {
         dataAdapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(dataAdapterType);
 
+        int typeSpinnerPosition = dataAdapterType.getPosition(exercise.getType());
+        typeSpinner.setSelection(typeSpinnerPosition);
+
         // Reptype spinner
-        Spinner repTypespinner = (Spinner) findViewById(R.id.exerciseRepType);
+        Spinner repTypeSpinner = (Spinner) findViewById(R.id.exerciseRepType);
 
         List<String> repTypes = new ArrayList<String>();
         repTypes.add("reps");
@@ -51,7 +54,10 @@ public class ExerciseActivity extends AppCompatActivity {
 
         ArrayAdapter<String> dataAdapterRepType = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, repTypes);
         dataAdapterRepType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        repTypespinner.setAdapter(dataAdapterRepType);
+        repTypeSpinner.setAdapter(dataAdapterRepType);
+
+        int repTypeSpinnerPosition = dataAdapterRepType.getPosition(exercise.getRepType());
+        repTypeSpinner.setSelection(repTypeSpinnerPosition);
 
         //Exercise Inputs
         TextView exerciseName = findViewById(R.id.exerciseName);

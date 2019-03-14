@@ -1,5 +1,7 @@
 package Api;
 
+import android.util.Log;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,8 +23,22 @@ public class ApiSession {
      * Before: Session session = new Session(Exercise[] exercises)
      * After: The selected exercises have bin stored if not error message
      */
-    public void saveSession(Session session) {
-        // Todo
+    public void createSession(Session session) {
+
+        //Convert session to jsonString
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonSession = null;
+
+        try {
+            jsonSession = mapper.writeValueAsString(session);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        HttpPostRequest request = new HttpPostRequest(jsonSession);
+
+        //Post to server
+        request.execute("api/createSession");
 
     }
 
@@ -31,9 +47,23 @@ public class ApiSession {
      * Before: {int x, x > 0} And has to be an id of a session that exists.
      * After: if success session with according id is deleted else error.
      */
-    public void deleteSession(int id) {
-        // Todo
+    public void deleteSession(Session session) {
 
+        //Convert session to jsonString
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonSession = null;
+
+
+        try {
+            jsonSession = mapper.writeValueAsString(session);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        HttpPostRequest request = new HttpPostRequest(jsonSession);
+
+        //Post to server
+        request.execute("api/removeSession");
     }
 
     /*
@@ -58,8 +88,8 @@ public class ApiSession {
 
         //Test user
         user.setId(1000);
-        user.setPassword("notandi");
-        user.setName("lykilord");
+        user.setPassword("leyniord");
+        user.setName("notandi");
 
         //Convert user to jsonString
         ObjectMapper mapper = new ObjectMapper();
@@ -73,6 +103,7 @@ public class ApiSession {
 
         //Post user to server
         HttpPostRequest request = new HttpPostRequest(jsonUser);
+
 
         try {
             response = request.execute("api/sessions").get();
