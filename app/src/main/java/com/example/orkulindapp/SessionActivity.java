@@ -87,8 +87,13 @@ public class SessionActivity extends AppCompatActivity {
                 SparseBooleanArray selectedItems = listView.getCheckedItemPositions();
                 List<Exercise> selectedExercises = new ArrayList<Exercise>();
                 for (int i = 0; i < selectedItems.size(); i++) {
-                    selectedExercises.add(exercises.get(selectedItems.keyAt(i)));
+                    if(selectedItems.get(selectedItems.keyAt(i))){
+                        selectedExercises.add(exercises.get(selectedItems.keyAt(i)));
+                    }
+
+
                 }
+
                 String name = ((EditText)findViewById(R.id.sessionName)).getText().toString();
                 String type = ((Spinner)findViewById(R.id.sessionType)).getSelectedItem().toString();
                 session.setName(name);

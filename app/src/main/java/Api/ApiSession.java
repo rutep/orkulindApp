@@ -87,7 +87,7 @@ public class ApiSession {
 
 
         //Test user
-        user.setId(1000);
+        user.setId(1);
         user.setPassword("leyniord");
         user.setName("notandi");
 

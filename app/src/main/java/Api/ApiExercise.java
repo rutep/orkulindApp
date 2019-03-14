@@ -92,8 +92,8 @@ public class ApiExercise{
     public List<Exercise> findAllUserExercises(User user) {
 
         //Test user
-        user.setId(1000);
-        user.setPassword("lykilord");
+        user.setId(1);
+        user.setPassword("leyniord");
         user.setName("notandi");
 
         //Convert user to jsonString
