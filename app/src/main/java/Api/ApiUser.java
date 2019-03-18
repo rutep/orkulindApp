@@ -15,26 +15,19 @@ public class ApiUser {
     * After: if user logs in: return User, else return User with error message
      */
     public User login(User user) {
+
+        Api api = new Api();
         //Convert user to jsonString
-        ObjectMapper mapper = new ObjectMapper();
         String jsonUser = null;
         String response = null;
-        try {
-            jsonUser = mapper.writeValueAsString(user);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        jsonUser = api.objToJson(user,mapper);
 
         HttpPostRequest request = new HttpPostRequest(jsonUser);
 
         //Post user to server
-        try {
-            response = request.execute("login/api").get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        response = api.Post(request,"/login/api");
 
         User u = null;
         try {
@@ -43,8 +36,11 @@ public class ApiUser {
             e.printStackTrace();
         }
 
+
         return u;
     }
+
+
 
     /*
     * Usage: api.register(user)
@@ -53,27 +49,17 @@ public class ApiUser {
      */
     public User register(User user){
 
+        Api api = new Api();
+
         //Convert user to jsonString
         ObjectMapper mapper = new ObjectMapper();
         String jsonUser = null;
         String response = null;
-        try {
-            jsonUser = mapper.writeValueAsString(user);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
 
+        jsonUser = api.objToJson(user, mapper);
         HttpPostRequest request = new HttpPostRequest(jsonUser);
-
+        response = api.Post(request,"/register/api");
         //Post user to server
-        try {
-            response = request.execute("register/api").get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         User u = null;
         try {
             u = mapper.readValue(response, User.class);
