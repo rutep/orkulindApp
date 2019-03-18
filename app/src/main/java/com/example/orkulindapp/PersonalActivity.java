@@ -145,7 +145,7 @@ public class PersonalActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent intent = new Intent();
                     switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
-                        case 1:  intent = new Intent(getActivity(), TrainActivity.class);
+                        case 1:  intent = new Intent(getActivity(), SelectTrainActivity.class);
                             break;
                         case 2:  intent = new Intent(getActivity(), SelectExerciseActivity.class);
                             break;
