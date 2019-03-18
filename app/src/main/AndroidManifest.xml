@@ -15,10 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".PersonalActivity"
+            android:label="@string/title_activity_personal"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".SelectTrainActivity" />
         <activity android:name=".SelectExerciseActivity" />
         <activity android:name=".StatisticActivity" />
-        <activity android:name=".PersonalActivity" />
         <activity android:name=".TrainActivity" />
         <activity android:name=".SelectSessionActivity" />
         <activity android:name=".SessionActivity" />
