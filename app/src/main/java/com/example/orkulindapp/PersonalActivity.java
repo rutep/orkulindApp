@@ -129,18 +129,24 @@ public class PersonalActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_personal, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            Button registerButton = (Button) rootView.findViewById(R.id.button);
+            ImageButton button = (ImageButton) rootView.findViewById(R.id.button);
 
             switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
-                case 1:  registerButton.setText("Train");
+                case 1:
+                    button.setImageResource(R.drawable.train_icon);
+                    textView.setText("Train");
                     break;
-                case 2:  registerButton.setText("Create Exercise");
+                case 2:
+                    button.setImageResource(R.drawable.exercise_icon);
+                    textView.setText("Exercise");
                     break;
-                case 3:  registerButton.setText("Create Session");
+                case 3:
+                    button.setImageResource(R.drawable.session_icon);
+                    textView.setText("Session");
                     break;
             }
 
-            registerButton.setOnClickListener(new OnClickListener() {
+            button.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent();
