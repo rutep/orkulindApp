@@ -1,5 +1,12 @@
 package Api;
 
+import android.util.Log;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.List;
+
 import Entity.Stats;
 import Entity.Training;
 
@@ -10,9 +17,24 @@ public class ApiTrainStatistic {
      * Before: Training training = new Training(Date date, Session session)
      * After: Training is saved
      */
-    public String saveTraining(Training training) {
-        // TODO
-        return "";
+    public void saveTraining(List<Training> trainings) {
+        //Convert trainings to jsonString
+
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonTrainings = null;
+
+        try {
+            jsonTrainings = mapper.writeValueAsString(trainings);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+
+
+        HttpPostRequest request = new HttpPostRequest(jsonTrainings);
+
+        //Post to server
+        request.execute("api/finishTraining");
     }
 
     /*

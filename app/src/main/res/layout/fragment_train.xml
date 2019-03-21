@@ -9,20 +9,44 @@
     tools:context=".TrainActivity$PlaceholderFragment">
 
     <LinearLayout
-        android:layout_width="395dp"
-        android:layout_height="326dp"
-        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="15dp"
-        app:layout_constraintBaseline_creator="15"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
         <TextView
-            android:id="@+id/train_label"
+            android:id="@+id/train_exercise_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
+
+        <EditText
+            android:id="@+id/train_exercise_reps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"/>
+
+        <TextView
+            android:id="@+id/train_exercise_repType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+
+        <Button
+            android:id="@+id/youtube_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="YouTube" />
+
+        <Button
+            android:id="@+id/train_finish_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Finish"
+            android:visibility="gone" />
 
     </LinearLayout>
 

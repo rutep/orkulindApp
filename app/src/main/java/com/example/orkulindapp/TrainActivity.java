@@ -1,6 +1,7 @@
 package com.example.orkulindapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
@@ -22,12 +23,17 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 
+import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import Api.ApiTrainStatistic;
 import Entity.Exercise;
 import Entity.Session;
+import Entity.Training;
 
 
 public class TrainActivity extends AppCompatActivity {
@@ -47,6 +53,7 @@ public class TrainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
     private Session session;
+
 
 
     @Override
@@ -101,8 +108,13 @@ public class TrainActivity extends AppCompatActivity {
          * The fragment argument representing the section number for this
          * fragment.
          */
-        private static final String EXERCISE = "exercise";
+        private static final String SESSION = "session";
+        private static final String EXPOS = "expos";
+        private Session session;
         private Exercise exercise;
+        private int expos;
+        private ApiTrainStatistic api;
+
 
         public PlaceholderFragment() {
         }
@@ -113,10 +125,11 @@ public class TrainActivity extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static TrainActivity.PlaceholderFragment newInstance(Exercise exercise) {
+        public static TrainActivity.PlaceholderFragment newInstance(Session session, int expos) {
             TrainActivity.PlaceholderFragment fragment = new TrainActivity.PlaceholderFragment();
             Bundle args = new Bundle();
-            args.putSerializable(EXERCISE, exercise);
+            args.putSerializable(SESSION, session);
+            args.putSerializable(EXPOS, expos);
             fragment.setArguments(args);
             return fragment;
         }
@@ -124,12 +137,52 @@ public class TrainActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            session = (Session) getArguments().getSerializable(SESSION);
+            expos = (int) getArguments().getSerializable(EXPOS);
+            exercise = session.getExercises().get(expos);
             View rootView = inflater.inflate(R.layout.fragment_train, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.train_label);
-            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            exercise = (Exercise) getArguments().getSerializable(EXERCISE);
-            textView.setText(exercise.getName());
 
+            TextView nameView = rootView.findViewById(R.id.train_exercise_name);
+            TextView repTypeView = rootView.findViewById(R.id.train_exercise_repType);
+            EditText repsView = rootView.findViewById(R.id.train_exercise_reps);
+            Button youtubeButton = rootView.findViewById(R.id.youtube_button);
+
+            nameView.setText(exercise.getName());
+            repTypeView.setText(exercise.getRepType());
+            repsView.setText(Integer.toString(exercise.getReps()));
+
+            youtubeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query="+exercise.getName())));
+                }
+            });
+
+            if(expos+1==session.getExercises().size()) {
+                Button finishButton = rootView.findViewById(R.id.train_finish_button);
+                finishButton.setVisibility(View.VISIBLE);
+
+                finishButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        List<Training> trainings = new ArrayList<>();
+                        for(Exercise e: session.getExercises()) {
+                            Training training = new Training();
+                            training.setExercise(e);
+                            training.setSession(session);
+                            training.setDate(new Date());
+                            //TODO finna reps fyrir öll fragment
+                            training.setReps(0);
+                            trainings.add(training);
+
+                        }
+                        api = new ApiTrainStatistic();
+                        api.saveTraining(trainings);
+
+                    }
+                });
+
+            }
 
 
             return rootView;
@@ -153,7 +206,7 @@ public class TrainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return TrainActivity.PlaceholderFragment.newInstance(session.getExercises().get(position));
+            return TrainActivity.PlaceholderFragment.newInstance(session, position);
         }
 
         @Override
