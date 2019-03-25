@@ -13,7 +13,9 @@
         <ListView
             android:id="@+id/exercise_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:divider="#d3d3d3"
+            android:dividerHeight="1dp"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_exercise"
