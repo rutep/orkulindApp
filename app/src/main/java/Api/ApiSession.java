@@ -16,7 +16,7 @@ import Entity.Exercise;
 import Entity.User;
 import Entity.Session;
 
-public class ApiSession {
+public class ApiSession extends Api{
 
     /*
      * Usage: api.createSession(session)
@@ -26,18 +26,10 @@ public class ApiSession {
     public void createSession(Session session) {
 
         //Convert session to jsonString
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonSession = null;
-
-        try {
-            jsonSession = mapper.writeValueAsString(session);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        String jsonSession = objToJson(session, new ObjectMapper());
 
         //Post to server
-        HttpPostRequest request = new HttpPostRequest(jsonSession);
-        request.execute("api/createSession");
+        post(new HttpPostRequest(jsonSession), "api/createSession");
 
     }
 
@@ -49,19 +41,10 @@ public class ApiSession {
     public void deleteSession(Session session) {
 
         //Convert session to jsonString
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonSession = null;
-
-
-        try {
-            jsonSession = mapper.writeValueAsString(session);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        String jsonSession = objToJson(session, new ObjectMapper());
 
         //Post to server
-        HttpPostRequest request = new HttpPostRequest(jsonSession);
-        request.execute("api/removeSession");
+        post(new HttpPostRequest(jsonSession), "api/removeSession");
     }
 
     /*
@@ -88,30 +71,15 @@ public class ApiSession {
         user.setName("notandi");
 
         //Convert user to jsonString
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonUser = null;
-        String response = null;
-        try {
-            jsonUser = mapper.writeValueAsString(user);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        String jsonUser = objToJson(user, new ObjectMapper());
 
         //Post user to server
-        HttpPostRequest request = new HttpPostRequest(jsonUser);
-
-        try {
-            response = request.execute("api/sessions").get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        String response = post(new HttpPostRequest(jsonUser), "api/sessions");
 
         //Convert sessions json response to a list of Session objects
         List<Session> sessions = null;
         try {
-            sessions = mapper.readValue(response, new TypeReference<List<Session>>(){});
+            sessions = new ObjectMapper().readValue(response, new TypeReference<List<Session>>(){});
         } catch (IOException e) {
             e.printStackTrace();
         }

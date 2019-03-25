@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutionException;
 
 import Entity.User;
 
-public class ApiUser {
+public class ApiUser extends Api{
 
     /*
     * Usage: api.login(user)
@@ -16,26 +16,19 @@ public class ApiUser {
      */
     public User login(User user) {
 
-        Api api = new Api();
         //Convert user to jsonString
-        String jsonUser = null;
-        String response = null;
-
-        ObjectMapper mapper = new ObjectMapper();
-        jsonUser = api.objToJson(user,mapper);
-
-        HttpPostRequest request = new HttpPostRequest(jsonUser);
+        String jsonUser = objToJson(user,new ObjectMapper());
 
         //Post user to server
-        response = api.Post(request,"/login/api");
+        String response = post(new HttpPostRequest(jsonUser),"/login/api");
 
+        //Convert json response to User object
         User u = null;
         try {
-            u = mapper.readValue(response, User.class);
+            u = new ObjectMapper().readValue(response, User.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         return u;
     }
@@ -49,20 +42,16 @@ public class ApiUser {
      */
     public User register(User user){
 
-        Api api = new Api();
-
         //Convert user to jsonString
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonUser = null;
-        String response = null;
+        String jsonUser = objToJson(user, new ObjectMapper());
 
-        jsonUser = api.objToJson(user, mapper);
-        HttpPostRequest request = new HttpPostRequest(jsonUser);
-        response = api.Post(request,"/register/api");
         //Post user to server
+        String response = post(new HttpPostRequest(jsonUser),"/register/api");
+
+        //Convert json response to User object
         User u = null;
         try {
-            u = mapper.readValue(response, User.class);
+            u = new ObjectMapper().readValue(response, User.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

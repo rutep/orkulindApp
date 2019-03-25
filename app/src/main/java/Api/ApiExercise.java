@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutionException;
 import Entity.Exercise;
 import Entity.User;
 
-public class ApiExercise{
+public class ApiExercise extends Api{
 
     public ApiExercise() {
 
@@ -33,18 +33,10 @@ public class ApiExercise{
     public void createExercise(Exercise exercise) {
 
         //Convert exercise to jsonString
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonExercise = null;
-
-        try {
-            jsonExercise = mapper.writeValueAsString(exercise);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        String jsonExercise = objToJson(exercise, new ObjectMapper());
 
         //Post to server
-        HttpPostRequest request = new HttpPostRequest(jsonExercise);
-        request.execute("api/createExercise");
+        post(new HttpPostRequest(jsonExercise), "api/createExercise");
     }
 
     /*
@@ -56,19 +48,10 @@ public class ApiExercise{
     public void deleteExercise(Exercise exercise) {
 
         //Convert exercise to jsonString
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonExercise = null;
-
-
-        try {
-            jsonExercise = mapper.writeValueAsString(exercise);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        String jsonExercise = objToJson(exercise, new ObjectMapper());
 
         //Post to server
-        HttpPostRequest request = new HttpPostRequest(jsonExercise);
-        request.execute("api/removeExercise");
+        post(new HttpPostRequest(jsonExercise), "api/removeExercise");
 
     }
 
@@ -96,29 +79,15 @@ public class ApiExercise{
         user.setName("notandi");
 
         //Convert user to jsonString
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonUser = null;
-        String response = null;
-        try {
-            jsonUser = mapper.writeValueAsString(user);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        String jsonUser = objToJson(user, new ObjectMapper());
 
         //Post user to server
-        HttpPostRequest request = new HttpPostRequest(jsonUser);
-        try {
-            response = request.execute("api/exercises").get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        String response = post(new HttpPostRequest(jsonUser), "api/exercises");
 
         //Convert exercises json response to a list of Exercise objects
         List<Exercise> exercises = null;
         try {
-            exercises = mapper.readValue(response, new TypeReference<List<Exercise>>(){});
+            exercises = new ObjectMapper().readValue(response, new TypeReference<List<Exercise>>(){});
         } catch (IOException e) {
             e.printStackTrace();
         }
