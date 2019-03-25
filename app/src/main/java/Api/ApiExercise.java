@@ -73,10 +73,6 @@ public class ApiExercise extends Api{
      */
     public List<Exercise> findAllUserExercises(User user) {
 
-        //Test user
-        user.setId(1);
-        user.setPassword("leyniord");
-        user.setName("notandi");
 
         //Convert user to jsonString
         String jsonUser = objToJson(user, new ObjectMapper());

@@ -40,7 +40,7 @@ public class SelectExerciseActivity extends AppCompatActivity {
 
         //List of Exercises
         api = new ApiExercise();
-        exercises = api.findAllUserExercises(new User());
+        exercises = api.findAllUserExercises(User.user);
 
         ArrayAdapter adapter = new ArrayAdapter<Exercise>(this, R.layout.activity_listview, exercises);
         ListView listView = findViewById(R.id.exercise_list);

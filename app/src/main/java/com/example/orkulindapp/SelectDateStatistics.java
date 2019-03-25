@@ -98,7 +98,7 @@ public class SelectDateStatistics extends AppCompatActivity {
                     msg.setText("Pleas input start date");
                 }
 
-                
+
             }
         });
 

@@ -18,7 +18,14 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import java.util.List;
+
+import Api.ApiExercise;
+import Entity.Exercise;
+import Entity.User;
+
 public class StatisticActivity extends AppCompatActivity {
+
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -58,6 +65,7 @@ public class StatisticActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
 
     }
 
@@ -109,12 +117,17 @@ public class StatisticActivity extends AppCompatActivity {
             return fragment;
         }
 
+        private ApiExercise api;
+        private List<Exercise> exercises;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            api = new ApiExercise();
+            exercises = api.findAllUserExercises(User.user);
             View rootView = inflater.inflate(R.layout.fragment_statistic, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            // textView.setText(getString(getArguments().getInt(ARG_SECTION_NUMBER));
             return rootView;
         }
     }
@@ -127,6 +140,7 @@ public class StatisticActivity extends AppCompatActivity {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+
         }
 
         @Override
@@ -138,7 +152,6 @@ public class StatisticActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 3;
         }
     }
