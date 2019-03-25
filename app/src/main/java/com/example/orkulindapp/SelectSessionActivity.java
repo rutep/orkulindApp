@@ -28,7 +28,7 @@ public class SelectSessionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_session);
 
-        //Add Session Button
+        //Create New Session Button
         FloatingActionButton fab = findViewById(R.id.fab_session);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,11 +41,8 @@ public class SelectSessionActivity extends AppCompatActivity {
 
 
         //List of Sessions
-
         api = new ApiSession();
-
         sessions = api.findAllUserSessions(new User());
-
 
         ArrayAdapter adapter = new ArrayAdapter<Session>(this, R.layout.activity_listview, sessions);
         ListView listView = findViewById(R.id.session_list);

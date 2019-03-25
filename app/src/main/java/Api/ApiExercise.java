@@ -42,15 +42,15 @@ public class ApiExercise{
             e.printStackTrace();
         }
 
-        HttpPostRequest request = new HttpPostRequest(jsonExercise);
-
         //Post to server
+        HttpPostRequest request = new HttpPostRequest(jsonExercise);
         request.execute("api/createExercise");
     }
 
     /*
      * Usage: api.delete(x)
-     * Before: {int x, x > 0} And has to be an id of a exercise that exists.
+     * Before: Exercise exercise = new Exercise(int id, String name, String type,
+     *                             int reps, String repType, String info, String videoLink)
      * After: if success exercise with according id is deleted else error.
      */
     public void deleteExercise(Exercise exercise) {
@@ -66,9 +66,8 @@ public class ApiExercise{
             e.printStackTrace();
         }
 
-        HttpPostRequest request = new HttpPostRequest(jsonExercise);
-
         //Post to server
+        HttpPostRequest request = new HttpPostRequest(jsonExercise);
         request.execute("api/removeExercise");
 
     }
@@ -106,9 +105,8 @@ public class ApiExercise{
             e.printStackTrace();
         }
 
-        HttpPostRequest request = new HttpPostRequest(jsonUser);
-
         //Post user to server
+        HttpPostRequest request = new HttpPostRequest(jsonUser);
         try {
             response = request.execute("api/exercises").get();
         } catch (ExecutionException e) {
@@ -117,7 +115,7 @@ public class ApiExercise{
             e.printStackTrace();
         }
 
-        //Convert exercises response to a list of exercises
+        //Convert exercises json response to a list of Exercise objects
         List<Exercise> exercises = null;
         try {
             exercises = mapper.readValue(response, new TypeReference<List<Exercise>>(){});

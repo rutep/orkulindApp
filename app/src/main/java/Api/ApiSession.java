@@ -20,8 +20,8 @@ public class ApiSession {
 
     /*
      * Usage: api.createSession(session)
-     * Before: Session session = new Session(Exercise[] exercises)
-     * After: The selected exercises have bin stored if not error message
+     * Before: Session session = new Session()
+     * After: The selected session has been created, if not error message
      */
     public void createSession(Session session) {
 
@@ -35,17 +35,16 @@ public class ApiSession {
             e.printStackTrace();
         }
 
-        HttpPostRequest request = new HttpPostRequest(jsonSession);
-
         //Post to server
+        HttpPostRequest request = new HttpPostRequest(jsonSession);
         request.execute("api/createSession");
 
     }
 
     /*
      * Usage: api.delete(x)
-     * Before: {int x, x > 0} And has to be an id of a session that exists.
-     * After: if success session with according id is deleted else error.
+     * Before: Session session = new Session()
+     * After: if success session with matching id is deleted else error.
      */
     public void deleteSession(Session session) {
 
@@ -60,9 +59,8 @@ public class ApiSession {
             e.printStackTrace();
         }
 
-        HttpPostRequest request = new HttpPostRequest(jsonSession);
-
         //Post to server
+        HttpPostRequest request = new HttpPostRequest(jsonSession);
         request.execute("api/removeSession");
     }
 
@@ -84,8 +82,6 @@ public class ApiSession {
      */
     public List<Session> findAllUserSessions(User user) {
 
-
-
         //Test user
         user.setId(1);
         user.setPassword("leyniord");
@@ -104,7 +100,6 @@ public class ApiSession {
         //Post user to server
         HttpPostRequest request = new HttpPostRequest(jsonUser);
 
-
         try {
             response = request.execute("api/sessions").get();
         } catch (ExecutionException e) {
@@ -113,7 +108,7 @@ public class ApiSession {
             e.printStackTrace();
         }
 
-        //Convert sessions response to a list of sessions
+        //Convert sessions json response to a list of Session objects
         List<Session> sessions = null;
         try {
             sessions = mapper.readValue(response, new TypeReference<List<Session>>(){});

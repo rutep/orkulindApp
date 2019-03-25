@@ -27,11 +27,8 @@ public class SelectTrainActivity extends AppCompatActivity {
 
 
         //List of Sessions
-
         api = new ApiSession();
-
         sessions = api.findAllUserSessions(new User());
-
 
         ArrayAdapter adapter = new ArrayAdapter<Session>(this, R.layout.activity_listview, sessions);
         ListView listView = findViewById(R.id.training_session_list);

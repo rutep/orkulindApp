@@ -34,6 +34,7 @@ public class ExerciseActivity extends AppCompatActivity {
         Spinner typeSpinner = (Spinner) findViewById(R.id.exerciseType);
 
         List<String> types = new ArrayList<String>();
+        // TODO
         types.add("Type 1");
         types.add("Type 2");
         types.add("Type 3");
@@ -49,6 +50,7 @@ public class ExerciseActivity extends AppCompatActivity {
         Spinner repTypeSpinner = (Spinner) findViewById(R.id.exerciseRepType);
 
         List<String> repTypes = new ArrayList<String>();
+        // TODO
         repTypes.add("reps");
         repTypes.add("minutes");
 
@@ -65,33 +67,39 @@ public class ExerciseActivity extends AppCompatActivity {
         TextView exerciseReps = findViewById(R.id.exerciseReps);
         exerciseReps.setText(Integer.toString(exercise.getReps()));
 
-        //Save and Delete Buttons
+        //Save Button
         Button saveButton = findViewById(R.id.saveButton_exercise);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Get inputs
                 String name = ((EditText)findViewById(R.id.exerciseName)).getText().toString();
                 String type = ((Spinner)findViewById(R.id.exerciseType)).getSelectedItem().toString();
                 String repType = ((Spinner)findViewById(R.id.exerciseRepType)).getSelectedItem().toString();
                 int reps = Integer.parseInt(((EditText)findViewById(R.id.exerciseReps)).getText().toString());
                 String videoLink = ((EditText)findViewById(R.id.exerciseVideoLink)).getText().toString();
 
+                //Set inputs
                 exercise.setName(name);
                 exercise.setType(type);
                 exercise.setReps(reps);
                 exercise.setRepType(repType);
                 exercise.setInfo(videoLink);
 
+                // Create Exercise
                 api.createExercise(exercise);
                 setResult(RESULT_OK, null);
                 finish();
             }
         });
 
+        //Delete Button
         Button deleteButton = findViewById(R.id.deleteButton_exercise);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // Delete exercise
                 api.deleteExercise(exercise);
                 setResult(RESULT_OK, null);
                 finish();

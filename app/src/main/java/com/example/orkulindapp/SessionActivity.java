@@ -41,10 +41,10 @@ public class SessionActivity extends AppCompatActivity {
         sessionName.setText(session.getName());
 
         // Type spinner
-
         Spinner typeSpinner = (Spinner) findViewById(R.id.sessionType);
 
         List<String> types = new ArrayList<String>();
+        //TODO
         types.add("Type 1");
         types.add("Type 2");
 
@@ -56,10 +56,8 @@ public class SessionActivity extends AppCompatActivity {
         typeSpinner.setSelection(spinnerPosition);
 
         //Exercise List
-
         exercise_api = new ApiExercise();
         final List<Exercise> exercises = exercise_api.findAllUserExercises(new User());
-
 
         ArrayAdapter adapter = new ArrayAdapter<Exercise>(this, android.R.layout.simple_list_item_single_choice, exercises);
         final ListView listView = findViewById(R.id.session_exercises_list);
@@ -79,11 +77,12 @@ public class SessionActivity extends AppCompatActivity {
             }
         }
 
-        //Save and Delete Buttons
+        //Save Button
         Button saveButton = findViewById(R.id.saveButton_session);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Get selected exercises
                 SparseBooleanArray selectedItems = listView.getCheckedItemPositions();
                 List<Exercise> selectedExercises = new ArrayList<Exercise>();
                 for (int i = 0; i < selectedItems.size(); i++) {
@@ -93,22 +92,26 @@ public class SessionActivity extends AppCompatActivity {
 
 
                 }
-
+                //Set inputs
                 String name = ((EditText)findViewById(R.id.sessionName)).getText().toString();
                 String type = ((Spinner)findViewById(R.id.sessionType)).getSelectedItem().toString();
                 session.setName(name);
                 session.setType(type);
                 session.setExercises(selectedExercises);
+
+                //Create session
                 api.createSession(session);
                 setResult(RESULT_OK, null);
                 finish();
             }
         });
 
+        //Delete Button
         Button deleteButton = findViewById(R.id.deleteButton_session);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Delete session
                 api.deleteSession(session);
                 setResult(RESULT_OK, null);
                 finish();

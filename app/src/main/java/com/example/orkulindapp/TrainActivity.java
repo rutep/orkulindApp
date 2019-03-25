@@ -65,8 +65,7 @@ public class TrainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.train_toolbar);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
+        // Create the adapter that will return a fragment for each of the sections of the activity.
         mTrainPagerAdapter = new TrainActivity.TrainPagerAdapter(getSupportFragmentManager(), session);
 
         // Set up the ViewPager with the sections adapter.
@@ -137,11 +136,13 @@ public class TrainActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            //Get session and exercise
             session = (Session) getArguments().getSerializable(SESSION);
             expos = (int) getArguments().getSerializable(EXPOS);
             exercise = session.getExercises().get(expos);
-            View rootView = inflater.inflate(R.layout.fragment_train, container, false);
 
+            // View
+            View rootView = inflater.inflate(R.layout.fragment_train, container, false);
             TextView nameView = rootView.findViewById(R.id.train_exercise_name);
             TextView repTypeView = rootView.findViewById(R.id.train_exercise_repType);
             EditText repsView = rootView.findViewById(R.id.train_exercise_reps);
@@ -158,10 +159,12 @@ public class TrainActivity extends AppCompatActivity {
                 }
             });
 
+            // Finish button at the last exercise fragment
             if(expos+1==session.getExercises().size()) {
                 Button finishButton = rootView.findViewById(R.id.train_finish_button);
                 finishButton.setVisibility(View.VISIBLE);
 
+                // Save trainings
                 finishButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -183,7 +186,6 @@ public class TrainActivity extends AppCompatActivity {
                 });
 
             }
-
 
             return rootView;
         }
