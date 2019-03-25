@@ -144,6 +144,10 @@ public class PersonalActivity extends AppCompatActivity {
                     button.setImageResource(R.drawable.session_icon);
                     textView.setText("Session");
                     break;
+                case 4:
+                    button.setImageResource(R.drawable.stats_icon);
+                    textView.setText("Statistics");
+                    break;
             }
 
             button.setOnClickListener(new OnClickListener() {
@@ -156,6 +160,8 @@ public class PersonalActivity extends AppCompatActivity {
                         case 2:  intent = new Intent(getActivity(), SelectExerciseActivity.class);
                             break;
                         case 3:  intent = new Intent(getActivity(), SelectSessionActivity.class);
+                            break;
+                        case 4:  intent = new Intent(getActivity(), SelectDateStatistics.class);
                             break;
                     }
                     startActivity(intent);
@@ -186,7 +192,7 @@ public class PersonalActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
     }
 }
