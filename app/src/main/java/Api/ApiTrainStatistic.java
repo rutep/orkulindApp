@@ -10,7 +10,7 @@ import java.util.List;
 import Entity.Stats;
 import Entity.Training;
 
-public class ApiTrainStatistic {
+public class ApiTrainStatistic extends Api{
 
     /*
      * Usage: api.saveTraining(training)
@@ -18,23 +18,12 @@ public class ApiTrainStatistic {
      * After: Training is saved
      */
     public void saveTraining(List<Training> trainings) {
+
         //Convert trainings to jsonString
+        String jsonTrainings = objToJson(trainings, new ObjectMapper());
 
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonTrainings = null;
-
-        try {
-            jsonTrainings = mapper.writeValueAsString(trainings);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-
-
-        HttpPostRequest request = new HttpPostRequest(jsonTrainings);
-
-        //Post to server
-        request.execute("api/finishTraining");
+        //Post trainings to server
+        post(new HttpPostRequest(jsonTrainings), "api/finishTraining");
     }
 
     /*

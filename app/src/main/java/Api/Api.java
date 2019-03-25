@@ -18,7 +18,7 @@ public class Api {
         return "";
     }
 
-    public String Post(HttpPostRequest request, String url) {
+    public String post(HttpPostRequest request, String url) {
         try {
             return request.execute(url).get();
         } catch (ExecutionException e) {

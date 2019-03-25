@@ -16,54 +16,35 @@ import Entity.Exercise;
 import Entity.User;
 import Entity.Session;
 
-public class ApiSession {
+public class ApiSession extends Api{
 
     /*
      * Usage: api.createSession(session)
-     * Before: Session session = new Session(Exercise[] exercises)
-     * After: The selected exercises have bin stored if not error message
+     * Before: Session session = new Session()
+     * After: The selected session has been created, if not error message
      */
     public void createSession(Session session) {
 
         //Convert session to jsonString
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonSession = null;
-
-        try {
-            jsonSession = mapper.writeValueAsString(session);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        HttpPostRequest request = new HttpPostRequest(jsonSession);
+        String jsonSession = objToJson(session, new ObjectMapper());
 
         //Post to server
-        request.execute("api/createSession");
+        post(new HttpPostRequest(jsonSession), "api/createSession");
 
     }
 
     /*
      * Usage: api.delete(x)
-     * Before: {int x, x > 0} And has to be an id of a session that exists.
-     * After: if success session with according id is deleted else error.
+     * Before: Session session = new Session()
+     * After: if success session with matching id is deleted else error.
      */
     public void deleteSession(Session session) {
 
         //Convert session to jsonString
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonSession = null;
-
-
-        try {
-            jsonSession = mapper.writeValueAsString(session);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        HttpPostRequest request = new HttpPostRequest(jsonSession);
+        String jsonSession = objToJson(session, new ObjectMapper());
 
         //Post to server
-        request.execute("api/removeSession");
+        post(new HttpPostRequest(jsonSession), "api/removeSession");
     }
 
     /*
@@ -84,39 +65,21 @@ public class ApiSession {
      */
     public List<Session> findAllUserSessions(User user) {
 
-
-
         //Test user
         user.setId(1);
         user.setPassword("leyniord");
         user.setName("notandi");
 
         //Convert user to jsonString
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonUser = null;
-        String response = null;
-        try {
-            jsonUser = mapper.writeValueAsString(user);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        String jsonUser = objToJson(user, new ObjectMapper());
 
         //Post user to server
-        HttpPostRequest request = new HttpPostRequest(jsonUser);
+        String response = post(new HttpPostRequest(jsonUser), "api/sessions");
 
-
-        try {
-            response = request.execute("api/sessions").get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        //Convert sessions response to a list of sessions
+        //Convert sessions json response to a list of Session objects
         List<Session> sessions = null;
         try {
-            sessions = mapper.readValue(response, new TypeReference<List<Session>>(){});
+            sessions = new ObjectMapper().readValue(response, new TypeReference<List<Session>>(){});
         } catch (IOException e) {
             e.printStackTrace();
         }

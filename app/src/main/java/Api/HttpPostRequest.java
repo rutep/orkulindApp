@@ -31,8 +31,10 @@ public class HttpPostRequest extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params){
+
         String stringUrl = LOCALURL + params[0];
         String response = null;
+
         try {
             //Create a URL object holding our url
             URL myUrl = new URL(stringUrl);
@@ -61,8 +63,6 @@ public class HttpPostRequest extends AsyncTask<String, Void, String> {
 
                 response = convertInputStreamToString(inputStream);
 
-                // From here you can convert the string to JSON with whatever JSON parser you like to use
-                // After converting the string to JSON, I call my custom callback. You can follow this process too, or you can implement the onPostExecute(Result) method
             } else {
                 // Status code is not 200
                 // Do something to handle the error
