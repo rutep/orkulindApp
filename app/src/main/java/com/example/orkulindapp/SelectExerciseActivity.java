@@ -9,9 +9,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Api.ApiExercise;
 import Entity.Exercise;
@@ -42,8 +46,9 @@ public class SelectExerciseActivity extends AppCompatActivity {
         api = new ApiExercise();
         exercises = api.findAllUserExercises(User.user);
 
-        ArrayAdapter adapter = new ArrayAdapter<Exercise>(this, R.layout.activity_listview, exercises);
         ListView listView = findViewById(R.id.exercise_list);
+        ArrayAdapter adapter = new ArrayAdapter<Exercise>(this, R.layout.activity_listview, exercises);
+
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

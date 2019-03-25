@@ -16,16 +16,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".StatisticActivity"
-            android:label="@string/title_activity_statistic"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".SelectDateStatistics" />
-        <activity
             android:name=".PersonalActivity"
             android:label="@string/title_activity_personal"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".SelectTrainActivity" />
         <activity android:name=".SelectExerciseActivity" />
+        <activity android:name=".StatisticActivity" />
         <activity android:name=".TrainActivity" />
         <activity android:name=".SelectSessionActivity" />
         <activity android:name=".SessionActivity" />

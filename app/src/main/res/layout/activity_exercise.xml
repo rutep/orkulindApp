@@ -21,22 +21,24 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Exercise Name"
-            android:layout_marginTop="64dp"
-            android:layout_marginBottom="32dp"
+            android:padding="32dp"
+            android:layout_marginTop="8dp"
             android:maxLines="1"
-            android:singleLine="true"/>
+            android:singleLine="true" />
 
         <Spinner
             android:id="@+id/exerciseType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"/>
+            android:padding="16dp"
+            android:layout_marginTop="8dp"/>
 
         <Spinner
             android:id="@+id/exerciseRepType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"/>
+            android:padding="16dp"
+            android:layout_marginTop="8dp"/>
 
         <EditText
             android:id="@+id/exerciseReps"
@@ -45,7 +47,8 @@
             android:ems="10"
             android:inputType="number"
             android:hint="Reps"
-            android:layout_marginBottom="32dp"
+            android:padding="32dp"
+            android:layout_marginTop="8dp"
             android:maxLines="1"
             android:singleLine="true"/>
 
@@ -55,7 +58,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Youtube Link"
-            android:layout_marginBottom="32dp"
+            android:padding="32dp"
+            android:layout_marginTop="8dp"
             android:maxLines="1"
             android:singleLine="true"/>
 
@@ -69,14 +73,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Save" />
+                android:text="Save"
+                android:padding="24dp"
+                android:layout_marginTop="8dp"/>
 
             <Button
                 android:id="@+id/deleteButton_exercise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Delete" />
+                android:text="Delete"
+                android:padding="24dp"
+                android:layout_marginTop="8dp"/>
         </LinearLayout>
 
 
