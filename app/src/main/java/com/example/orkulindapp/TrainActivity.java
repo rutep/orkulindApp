@@ -51,7 +51,7 @@ public class TrainActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the training contents.
      */
-    private ViewPager mViewPager;
+    private static ViewPager mViewPager;
     private Session session;
 
 
@@ -113,6 +113,7 @@ public class TrainActivity extends AppCompatActivity {
         private Exercise exercise;
         private int expos;
         private ApiTrainStatistic api;
+        private View rootView;
 
 
         public PlaceholderFragment() {
@@ -142,7 +143,7 @@ public class TrainActivity extends AppCompatActivity {
             exercise = session.getExercises().get(expos);
 
             // View
-            View rootView = inflater.inflate(R.layout.fragment_train, container, false);
+            rootView = inflater.inflate(R.layout.fragment_train, container, false);
             TextView nameView = rootView.findViewById(R.id.train_exercise_name);
             TextView repTypeView = rootView.findViewById(R.id.train_exercise_repType);
             EditText repsView = rootView.findViewById(R.id.train_exercise_reps);
@@ -159,33 +160,31 @@ public class TrainActivity extends AppCompatActivity {
                 }
             });
 
-            // Finish button at the last exercise fragment
-            if(expos+1==session.getExercises().size()) {
-                Button finishButton = rootView.findViewById(R.id.train_finish_button);
-                finishButton.setVisibility(View.VISIBLE);
+            // Save button
+            Button saveButton = rootView.findViewById(R.id.train_finish_button);
 
-                // Save trainings
-                finishButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        List<Training> trainings = new ArrayList<>();
-                        for(Exercise e: session.getExercises()) {
-                            Training training = new Training();
-                            training.setExercise(e);
-                            training.setSession(session);
-                            training.setDate(new Date());
-                            //TODO finna reps fyrir öll fragment
-                            training.setReps(0);
-                            trainings.add(training);
+            // Save trainings
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Training training = new Training();
+                    training.setExercise(exercise);
+                    training.setSession(session);
+                    training.setDate(new Date());
+                    training.setReps(Integer.parseInt(((EditText)rootView.findViewById(R.id.train_exercise_reps)).getText().toString()));
 
-                        }
-                        api = new ApiTrainStatistic();
-                        api.saveTraining(trainings);
-
+                    api = new ApiTrainStatistic();
+                    api.saveTraining(training);
+                    if(expos + 1 == session.getExercises().size()) {
+                        getActivity().finish();
                     }
-                });
+                    else {
+                        mViewPager.setCurrentItem(expos+1);
+                    }
 
-            }
+
+                }
+            });
 
             return rootView;
         }

@@ -17,13 +17,13 @@ public class ApiTrainStatistic extends Api{
      * Before: Training training = new Training(Date date, Session session)
      * After: Training is saved
      */
-    public void saveTraining(List<Training> trainings) {
+    public void saveTraining(Training training) {
 
         //Convert trainings to jsonString
-        String jsonTrainings = objToJson(trainings, new ObjectMapper());
+        String jsonTraining = objToJson(training, new ObjectMapper());
 
         //Post trainings to server
-        post(new HttpPostRequest(jsonTrainings), "api/finishTraining");
+        post(new HttpPostRequest(jsonTraining), "api/finishTraining");
     }
 
     /*
