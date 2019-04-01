@@ -21,8 +21,11 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".SelectTrainActivity" />
         <activity android:name=".SelectExerciseActivity" />
-        <activity android:name=".StatisticActivity" />
-        <activity android:name=".TrainActivity" />
+        <activity android:name=".StatisticActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".SelectDateStatistics" />
+        <activity android:name=".TrainActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".SelectSessionActivity" />
         <activity android:name=".SessionActivity" />
         <activity android:name=".RegisterActivity" />
