@@ -7,6 +7,7 @@
     tools:context=".SelectExerciseActivity">
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -15,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="#d3d3d3"
-            android:dividerHeight="1dp"/>
+            android:dividerHeight="1dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_exercise"
@@ -23,8 +24,26 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:src="@drawable/exercise_icon"
+            app:backgroundTint="@android:color/background_light"
+            app:backgroundTintMode="screen" />
 
     </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="54dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/frameLayout"
+        app:layout_constraintHorizontal_bias="0.977"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.987"
+        app:srcCompat="@drawable/exercise_icon" />
 
 </android.support.constraint.ConstraintLayout>
