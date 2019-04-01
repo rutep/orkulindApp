@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -147,7 +148,7 @@ public class TrainActivity extends AppCompatActivity {
             TextView nameView = rootView.findViewById(R.id.train_exercise_name);
             TextView repTypeView = rootView.findViewById(R.id.train_exercise_repType);
             EditText repsView = rootView.findViewById(R.id.train_exercise_reps);
-            Button youtubeButton = rootView.findViewById(R.id.youtube_button);
+            ImageButton youtubeButton = rootView.findViewById(R.id.youtube_button);
 
             nameView.setText(exercise.getName());
             repTypeView.setText(exercise.getRepType());
