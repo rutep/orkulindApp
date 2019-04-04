@@ -99,6 +99,7 @@ public class SessionActivity extends AppCompatActivity {
                 session.setName(name);
                 session.setType(type);
                 session.setExercises(selectedExercises);
+                session.setUserID(User.user.getId());
 
                 //Create session
                 api.createSession(session);

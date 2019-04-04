@@ -16,6 +16,7 @@ import java.util.List;
 
 import Api.ApiExercise;
 import Entity.Exercise;
+import Entity.User;
 
 public class ExerciseActivity extends AppCompatActivity {
 
@@ -85,6 +86,7 @@ public class ExerciseActivity extends AppCompatActivity {
                 exercise.setReps(reps);
                 exercise.setRepType(repType);
                 exercise.setInfo(videoLink);
+                exercise.setUserID(User.user.getId());
 
                 // Create Exercise
                 api.createExercise(exercise);
