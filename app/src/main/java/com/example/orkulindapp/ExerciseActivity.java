@@ -35,10 +35,11 @@ public class ExerciseActivity extends AppCompatActivity {
         Spinner typeSpinner = (Spinner) findViewById(R.id.exerciseType);
 
         List<String> types = new ArrayList<String>();
-        // TODO
-        types.add("Type 1");
-        types.add("Type 2");
-        types.add("Type 3");
+
+        types.add("Upper Body");
+        types.add("Lower Body");
+        types.add("Core");
+        types.add("Cardio");
 
         ArrayAdapter<String> dataAdapterType = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, types);
         dataAdapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -51,7 +52,6 @@ public class ExerciseActivity extends AppCompatActivity {
         Spinner repTypeSpinner = (Spinner) findViewById(R.id.exerciseRepType);
 
         List<String> repTypes = new ArrayList<String>();
-        // TODO
         repTypes.add("reps");
         repTypes.add("minutes");
 
