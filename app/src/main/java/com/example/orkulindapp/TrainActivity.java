@@ -162,7 +162,7 @@ public class TrainActivity extends AppCompatActivity {
             });
 
             // Save button
-            Button saveButton = rootView.findViewById(R.id.train_finish_button);
+            Button saveButton = rootView.findViewById(R.id.btn_save);
 
             // Save trainings
             saveButton.setOnClickListener(new View.OnClickListener() {
@@ -184,6 +184,21 @@ public class TrainActivity extends AppCompatActivity {
                     }
 
 
+                }
+            });
+
+            // Skip button
+            Button skipButton = rootView.findViewById(R.id.btn_skip);
+
+            skipButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(expos + 1 == session.getExercises().size()) {
+                        getActivity().finish();
+                    }
+                    else {
+                        mViewPager.setCurrentItem(expos+1);
+                    }
                 }
             });
 
