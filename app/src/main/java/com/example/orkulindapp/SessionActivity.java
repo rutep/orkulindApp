@@ -1,5 +1,6 @@
 package com.example.orkulindapp;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,9 +45,11 @@ public class SessionActivity extends AppCompatActivity {
         Spinner typeSpinner = (Spinner) findViewById(R.id.sessionType);
 
         List<String> types = new ArrayList<String>();
-        //TODO
-        types.add("Type 1");
-        types.add("Type 2");
+
+        types.add("Upper Body");
+        types.add("Lower Body");
+        types.add("Core");
+        types.add("Cardio");
 
         ArrayAdapter<String> dataAdapterType = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, types);
         dataAdapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -57,7 +60,7 @@ public class SessionActivity extends AppCompatActivity {
 
         //Exercise List
         exercise_api = new ApiExercise();
-        final List<Exercise> exercises = exercise_api.findAllUserExercises(new User());
+        final List<Exercise> exercises = exercise_api.findAllUserExercises(User.user);
 
         ArrayAdapter adapter = new ArrayAdapter<Exercise>(this, android.R.layout.simple_list_item_single_choice, exercises);
         final ListView listView = findViewById(R.id.session_exercises_list);
@@ -111,6 +114,7 @@ public class SessionActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 //Delete session
                 api.deleteSession(session);
                 setResult(RESULT_OK, null);
