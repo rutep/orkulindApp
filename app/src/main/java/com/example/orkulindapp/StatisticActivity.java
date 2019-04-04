@@ -126,7 +126,8 @@ public class StatisticActivity extends AppCompatActivity {
             exercises = api.findAllUserExercises(User.user);
             View rootView = inflater.inflate(R.layout.fragment_statistic, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            textView.setText(SelectDateStatistics.statList.get(getArguments().getInt(ARG_SECTION_NUMBER) - 1).getExercise().getName() );
+
             // textView.setText(getString(getArguments().getInt(ARG_SECTION_NUMBER));
             return rootView;
         }
@@ -152,7 +153,7 @@ public class StatisticActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return SelectDateStatistics.statList.size();
         }
     }
 }

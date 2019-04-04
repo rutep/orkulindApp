@@ -1,6 +1,7 @@
 package com.example.orkulindapp;
 
 import android.app.DatePickerDialog;
+import android.content.Entity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,13 +11,21 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 import java.util.Calendar;
+import java.util.List;
+
+import Api.ApiTrainStatistic;
+import Entity.Stats;
+import Entity.User;
 
 public class SelectDateStatistics extends AppCompatActivity {
 
+    public static List<Stats> statList;
     EditText startDate, endDate;
     TextView msg;
     DatePickerDialog datePickerDialog;
+    static Stats[] statsArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,7 @@ public class SelectDateStatistics extends AppCompatActivity {
         Button buttonStartDate = (Button) findViewById(R.id.buttonStartDate);
         Button buttonEndDate = (Button) findViewById(R.id.buttonEndDate);
         Button buttonStats = (Button) findViewById(R.id.buttonStats);
+
 
 
 
@@ -49,8 +59,23 @@ public class SelectDateStatistics extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 // set day of month , month and year value in the edit text
-                                startDate.setText(dayOfMonth + "/"
-                                        + (monthOfYear + 1) + "/" + year);
+                                String day, month;
+
+                                monthOfYear += 1;
+
+                                if(monthOfYear < 10) {
+                                    month = "0" + monthOfYear;
+                                } else {
+                                    month = "" + monthOfYear;
+                                }
+
+                                if(dayOfMonth < 10) {
+                                    day = "0" + dayOfMonth;
+                                } else {
+                                    day = "" + dayOfMonth;
+                                }
+
+                                startDate.setText( year + "-" + month + "-" + day);
 
                             }
                         }, mYear, mMonth, mDay);
@@ -74,8 +99,25 @@ public class SelectDateStatistics extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 // set day of month , month and year value in the edit text
-                                endDate.setText(dayOfMonth + "/"
-                                        + (monthOfYear + 1) + "/" + year);
+
+                                monthOfYear += 1;
+
+                                String day, month;
+
+                                if(monthOfYear < 10) {
+                                    month = "0" + monthOfYear;
+                                } else {
+                                    month = "" + monthOfYear;
+                                }
+
+                                if(dayOfMonth < 10) {
+                                    day = "0" + dayOfMonth;
+                                } else {
+                                    day = "" + dayOfMonth;
+                                }
+
+                                endDate.setText( year + "-" + month + "-" + day);
+
 
                             }
                         }, mYear, mMonth, mDay);
@@ -89,7 +131,21 @@ public class SelectDateStatistics extends AppCompatActivity {
                 if( startDate.getText().toString().length() > 0) {
                     if(endDate.getText().toString().length() > 0) {
                         Intent intent = new Intent(SelectDateStatistics.this, StatisticActivity.class);
-                        startActivity(intent);
+
+
+                        ApiTrainStatistic statistic = new ApiTrainStatistic();
+                        Stats stats = new Stats(startDate.getText().toString(),
+                                                endDate.getText().toString(), User.user.getId() );
+
+                        statList = statistic.findStatistics(stats);
+
+                        if(statList == null){
+                            msg.setText("No exercise on given period was found");
+                        } else {
+
+                            startActivity(intent);
+                        }
+
                     } else {
 
                         msg.setText("Pleas input end date");

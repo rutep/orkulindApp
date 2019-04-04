@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 import Entity.User;
 
 public class Api {
+
     public String objToJson(Object o, ObjectMapper mapper){
         try {
             return mapper.writeValueAsString(o);

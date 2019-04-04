@@ -3,12 +3,18 @@ package Api;
 import android.util.Log;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
+import Entity.Exercise;
 import Entity.Stats;
 import Entity.Training;
+import Entity.User;
 
 public class ApiTrainStatistic extends Api{
 
@@ -39,9 +45,23 @@ public class ApiTrainStatistic extends Api{
     /*
     * TODO
      */
-    public Stats findStatistics(Stats stats) {
-        // TODO
-        return stats;
+    public List<Stats> findStatistics(Stats stats) {
+        //Convert user to jsonString
+        //Convert user to jsonString
+        String json = objToJson(stats, new ObjectMapper());
+
+        //Post user to server
+        String response = post(new HttpPostRequest(json), "api/statistics");
+
+        //Convert exercises json response to a list of Exercise objects
+        List<Stats> stat = null;
+        try {
+            stat = new ObjectMapper().readValue(response, new TypeReference<List<Stats>>(){});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return stat;
     }
 
     /*
