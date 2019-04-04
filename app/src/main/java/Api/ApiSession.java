@@ -65,10 +65,6 @@ public class ApiSession extends Api{
      */
     public List<Session> findAllUserSessions(User user) {
 
-        //Test user
-        user.setId(1);
-        user.setPassword("leyniord");
-        user.setName("notandi");
 
         //Convert user to jsonString
         String jsonUser = objToJson(user, new ObjectMapper());
