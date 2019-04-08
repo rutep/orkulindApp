@@ -1,5 +1,6 @@
 package com.example.orkulindapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
@@ -13,10 +14,12 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -52,7 +55,7 @@ public class TrainActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the training contents.
      */
-    private static ViewPager mViewPager;
+    private static CustomViewPager mViewPager;
     private Session session;
 
 
@@ -70,10 +73,9 @@ public class TrainActivity extends AppCompatActivity {
         mTrainPagerAdapter = new TrainActivity.TrainPagerAdapter(getSupportFragmentManager(), session);
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.train_container);
+        mViewPager = (CustomViewPager)findViewById(R.id.train_container);
+        mViewPager.setSwipeable(false);
         mViewPager.setAdapter(mTrainPagerAdapter);
-
-
 
     }
 
@@ -99,6 +101,8 @@ public class TrainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     /**
      * A placeholder fragment containing a simple view.
