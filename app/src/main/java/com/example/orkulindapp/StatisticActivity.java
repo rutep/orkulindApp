@@ -126,7 +126,12 @@ public class StatisticActivity extends AppCompatActivity {
             exercises = api.findAllUserExercises(User.user);
             View rootView = inflater.inflate(R.layout.fragment_statistic, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(SelectDateStatistics.statList.get(getArguments().getInt(ARG_SECTION_NUMBER) - 1).getExercise().getName() );
+            TextView textView2 = (TextView) rootView.findViewById(R.id.section_label2);
+            TextView textView3 = (TextView) rootView.findViewById(R.id.section_label3);
+
+            textView.setText(textView.getText() + SelectDateStatistics.statList.get(getArguments().getInt(ARG_SECTION_NUMBER) - 1).getExercise().getName() );
+            textView2.setText(textView2.getText() +  String.valueOf(SelectDateStatistics.statList.get(getArguments().getInt(ARG_SECTION_NUMBER) - 1).getAverageReps() ));
+            textView3.setText(textView3.getText() + String.valueOf(SelectDateStatistics.statList.get(getArguments().getInt(ARG_SECTION_NUMBER) - 1).getTotalReps()) );
 
             // textView.setText(getString(getArguments().getInt(ARG_SECTION_NUMBER));
             return rootView;

@@ -25,7 +25,6 @@ public class SelectDateStatistics extends AppCompatActivity {
     EditText startDate, endDate;
     TextView msg;
     DatePickerDialog datePickerDialog;
-    static Stats[] statsArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,14 +131,14 @@ public class SelectDateStatistics extends AppCompatActivity {
                     if(endDate.getText().toString().length() > 0) {
                         Intent intent = new Intent(SelectDateStatistics.this, StatisticActivity.class);
 
-
-                        ApiTrainStatistic statistic = new ApiTrainStatistic();
                         Stats stats = new Stats(startDate.getText().toString(),
-                                                endDate.getText().toString(), User.user.getId() );
-
+                                endDate.getText().toString(), User.user.getId() );
+                        ApiTrainStatistic statistic = new ApiTrainStatistic();
                         statList = statistic.findStatistics(stats);
 
-                        if(statList == null){
+
+
+                        if(statList.size() == 0){
                             msg.setText("No exercise on given period was found");
                         } else {
 

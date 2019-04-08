@@ -62,6 +62,7 @@ public class SelectExerciseActivity extends AppCompatActivity {
         });
     }
 
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -71,4 +72,5 @@ public class SelectExerciseActivity extends AppCompatActivity {
             this.finish();
         }
     }
+    */
 }
