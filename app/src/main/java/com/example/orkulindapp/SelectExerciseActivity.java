@@ -75,10 +75,6 @@ public class SelectExerciseActivity extends AppCompatActivity {
         });
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 771456dcadd0e9f3f7d42cedabbf8a99f940c9c6
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
