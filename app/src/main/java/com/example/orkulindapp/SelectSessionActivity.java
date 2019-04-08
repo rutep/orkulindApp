@@ -1,5 +1,7 @@
 package com.example.orkulindapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +45,24 @@ public class SelectSessionActivity extends AppCompatActivity {
         //List of Sessions
         api = new ApiSession();
         sessions = api.findAllUserSessions(User.user);
+
+        if(sessions.size() == 0 || sessions == null) {
+            new AlertDialog.Builder(SelectSessionActivity.this)
+                    .setTitle("Create Session")
+                    .setMessage("In this section you can create your own session. A session consists of exercises that you have created. If you push the button in the lower right corner you can create new session")
+
+                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                    // The dialog is automatically dismissed when a dialog button is clicked.
+                    .setPositiveButton("Back to select Session window", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Continue with delete operation
+                        }
+                    })
+
+                    // A null listener allows the button to dismiss the dialog and take no further action.
+                    .show();
+        }
+
 
         ArrayAdapter adapter = new ArrayAdapter<Session>(this, R.layout.activity_listview, sessions);
         ListView listView = findViewById(R.id.session_list);

@@ -1,5 +1,7 @@
 package com.example.orkulindapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +31,23 @@ public class SelectTrainActivity extends AppCompatActivity {
         //List of Sessions
         api = new ApiSession();
         sessions = api.findAllUserSessions(User.user);
+        if(sessions.size() == 0 || sessions == null) {
+            new AlertDialog.Builder(SelectTrainActivity.this)
+                    .setTitle("Train")
+                    .setMessage("In this section you can select a training session to train. Plz create a training session to continue")
+
+                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                    // The dialog is automatically dismissed when a dialog button is clicked.
+                    .setPositiveButton("Back to select Training window", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Continue with delete operation
+                        }
+                    })
+
+                    // A null listener allows the button to dismiss the dialog and take no further action.
+                    .show();
+        }
+
 
         ArrayAdapter adapter = new ArrayAdapter<Session>(this, R.layout.activity_listview, sessions);
         ListView listView = findViewById(R.id.training_session_list);

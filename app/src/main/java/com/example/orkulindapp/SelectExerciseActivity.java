@@ -1,6 +1,7 @@
 package com.example.orkulindapp;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -47,15 +48,20 @@ public class SelectExerciseActivity extends AppCompatActivity {
         api = new ApiExercise();
         exercises = api.findAllUserExercises(User.user);
         if(exercises.size() == 0 || exercises == null) {
-            // 1. Instantiate an <code><a href="/reference/android/app/AlertDialog.Builder.html">AlertDialog.Builder</a></code> with its constructor
-            AlertDialog.Builder builder = new AlertDialog.Builder(SelectExerciseActivity.this);
+            new AlertDialog.Builder(SelectExerciseActivity.this)
+                    .setTitle("Create Exercise")
+                    .setMessage("In this section you can create your own personal exercise. If you push the button in the lower right corner you can create new exercise")
 
-            // 2. Chain together various setter methods to set the dialog characteristics
-            builder.setMessage("Skilaboð")
-                    .setTitle("Titill");
+                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                    // The dialog is automatically dismissed when a dialog button is clicked.
+                    .setPositiveButton("Back to select Exercise window", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Continue with delete operation
+                        }
+                    })
 
-            // 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
-            AlertDialog dialog = builder.create();
+                    // A null listener allows the button to dismiss the dialog and take no further action.
+                    .show();
         }
 
 
@@ -75,15 +81,6 @@ public class SelectExerciseActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK){
-            Intent refresh = new Intent(this, SelectExerciseActivity.class);
-            startActivity(refresh);
-            this.finish();
-        }
-    }
 
 }
 
