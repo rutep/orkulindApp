@@ -78,14 +78,12 @@ public class ExerciseActivity extends AppCompatActivity {
                 String type = ((Spinner)findViewById(R.id.exerciseType)).getSelectedItem().toString();
                 String repType = ((Spinner)findViewById(R.id.exerciseRepType)).getSelectedItem().toString();
                 int reps = Integer.parseInt(((EditText)findViewById(R.id.exerciseReps)).getText().toString());
-                String videoLink = ((EditText)findViewById(R.id.exerciseVideoLink)).getText().toString();
 
                 //Set inputs
                 exercise.setName(name);
                 exercise.setType(type);
                 exercise.setReps(reps);
                 exercise.setRepType(repType);
-                exercise.setInfo(videoLink);
                 exercise.setUserID(User.user.getId());
 
                 // Create Exercise
