@@ -1,5 +1,6 @@
 package com.example.orkulindapp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -45,10 +46,22 @@ public class SelectExerciseActivity extends AppCompatActivity {
         //List of Exercises
         api = new ApiExercise();
         exercises = api.findAllUserExercises(User.user);
+        if(exercises.size() == 0 || exercises == null) {
+            // 1. Instantiate an <code><a href="/reference/android/app/AlertDialog.Builder.html">AlertDialog.Builder</a></code> with its constructor
+            AlertDialog.Builder builder = new AlertDialog.Builder(SelectExerciseActivity.this);
+
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage("Skilaboð")
+                    .setTitle("Titill");
+
+            // 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
+            AlertDialog dialog = builder.create();
+        }
+
+
 
         ListView listView = findViewById(R.id.exercise_list);
         ArrayAdapter adapter = new ArrayAdapter<Exercise>(this, R.layout.activity_listview, exercises);
-
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,7 +75,6 @@ public class SelectExerciseActivity extends AppCompatActivity {
         });
     }
 
-    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -72,5 +84,7 @@ public class SelectExerciseActivity extends AppCompatActivity {
             this.finish();
         }
     }
-    */
+
 }
+
+
