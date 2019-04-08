@@ -141,7 +141,7 @@ public class SelectDateStatistics extends AppCompatActivity {
                         if(statList.size() == 0){
                             msg.setText("No exercise on given period was found");
                         } else {
-
+                            msg.setText("");
                             startActivity(intent);
                         }
 
