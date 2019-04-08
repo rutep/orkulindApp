@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_alignParentTop='true'>
+            android:layout_alignParentTop='true'
+            android:layout_marginTop="64dp">
 
             <TextView
                 android:id="@+id/train_exercise_name"
@@ -34,6 +35,8 @@
                 android:layout_height="128dp"
                 android:background="@null"
                 android:padding="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
                 android:scaleType="fitCenter"
                 android:layout_gravity="center"
                 android:src="@drawable/youtube_button_icon" />
@@ -42,14 +45,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="136dp">
                 <EditText
                     android:id="@+id/train_exercise_reps"
-                    android:layout_width="wrap_content"
+                    android:layout_width="64sp"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="number"
                     android:padding="16dp"
+
                     android:textSize="24dp" />
 
                 <TextView
